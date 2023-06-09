@@ -12,12 +12,8 @@ public class HttpCodesResource {
 
     @Path("/error")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Response handleErrorRequest() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("status", 404);
-        jsonObject.put("content", "no page found");
-        return Response.status(404, jsonObject.toString()).build();
+        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
     }
 
     @Path("/ok")
