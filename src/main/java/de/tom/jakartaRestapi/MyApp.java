@@ -1,8 +1,6 @@
 package de.tom.jakartaRestapi;
 
 import com.sun.net.httpserver.HttpServer;
-import de.tom.jakartaRestapi.resources.HelloResource;
-import de.tom.jakartaRestapi.resources.HttpCodesResource;
 import jakarta.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -13,8 +11,7 @@ public class MyApp {
     public static void main(String[] args) {
         URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
         ResourceConfig config = new ResourceConfig();
-        //config.register(HelloResource.class);
-        config.register(HttpCodesResource.class);
+        config.packages(true, "de.tom.jakartaRestapi");
         final HttpServer server = JdkHttpServerFactory.createHttpServer(baseUri, config);
 
         System.out.println("Server started at " + baseUri);

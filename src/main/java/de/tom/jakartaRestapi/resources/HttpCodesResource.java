@@ -17,7 +17,7 @@ public class HttpCodesResource {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", 404);
         jsonObject.put("content", "no page found");
-        return Response.serverError().status(404, jsonObject.toString()).build();
+        return Response.status(404, jsonObject.toString()).build();
     }
 
     @Path("/ok")
@@ -26,8 +26,8 @@ public class HttpCodesResource {
     public Response handleOkRequest() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", 200);
-        jsonObject.put("content", "no page found");
-        return Response.ok().status(404, jsonObject.toString()).build();
+        jsonObject.put("content", "success");
+        return Response.ok(jsonObject.toString()).build();
     }
 
 }
