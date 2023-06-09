@@ -8,15 +8,18 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Optional;
 
 @Path("/api")
 public class ProductResource {
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/product/{productName}")
-    public Product getData(@PathParam("productName") String productName) {
+    public String getData(@PathParam("productName") String productName) {
+        return getProduct(productName).toString();
+    }
+
+    private static Product getProduct(String productName) {
         return ProductRepositoryInMemory
                 .getInstance()
                 .getAll()
@@ -29,10 +32,11 @@ public class ProductResource {
     @PUT
     @Path(("/product/{productName}"))
     public Response deleteProduct(@PathParam("productName") String productName) {
+        final Product product = getProduct(productName);
         ProductRepositoryInMemory
                 .getInstance()
-                .remove(getData(productName));
-        return Response.ok("delete " + getData(productName)).build();
+                .remove(product);
+        return Response.ok("delete " + product).build();
     }
 
     @POST
